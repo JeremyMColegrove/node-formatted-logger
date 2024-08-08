@@ -1,0 +1,38 @@
+{
+  "name": "formatted-logger",
+  "version": "1.0.1",
+  "description": "A beautiful, formatted logger for Node JS outputs with groupings, colors, and custom log levels.",
+  "main": "index.js",
+  "scripts": {
+    "build":"tsc --build tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeremyMColegrove/node-formatted-logger.git"
+  },
+  "keywords": [
+    "logger",
+    "log",
+    "format",
+    "beautiful",
+    "pretty",
+    "group",
+    "grouping",
+    "colors",
+    "print",
+    "console"
+  ],
+  "author": "Jeremy Colegrove",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeremyMColegrove/node-formatted-logger/issues"
+  },
+  "homepage": "https://github.com/JeremyMColegrove/node-formatted-logger#readme",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "ansis": "^3.3.2"
+  }
+}
