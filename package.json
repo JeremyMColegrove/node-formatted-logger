@@ -1,17 +1,23 @@
 {
   "name": "formatted-logger",
-  "version": "1.0.1",
+  "version": "1.11.0",
   "description": "A beautiful, formatted logger for Node JS outputs with groupings, colors, and custom log levels.",
-  "main": "index.js",
   "type": "module",
-  "types": "dist/types/index.d.js",
-  "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "npm run build:cjs && npm run build:esm && npm run build:types",
     "build:cjs": "tsc -p config/tsconfig.cjs.json",
     "build:esm": "tsc -p config/tsconfig.esm.json",
     "build:types": "tsc -p config/tsconfig.types.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/index.js",
+    "push": "npm run build && npm publish"
+    
   },
   "publishConfig": {
     "access": "public"
@@ -23,6 +29,7 @@
     "type": "git",
     "url": "git+https://github.com/JeremyMColegrove/node-formatted-logger.git"
   },
+  "license": "MIT",
   "keywords": [
     "logger",
     "log",
@@ -36,12 +43,13 @@
     "console"
   ],
   "author": "Jeremy Colegrove",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/JeremyMColegrove/node-formatted-logger/issues"
   },
   "homepage": "https://github.com/JeremyMColegrove/node-formatted-logger#readme",
   "devDependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.7.0",
     "typescript": "^5.5.4"
   },
   "dependencies": {

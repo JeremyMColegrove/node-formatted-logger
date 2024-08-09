@@ -1,20 +1,23 @@
-type LoggerLevel = 'error' | 'warn' | 'info' | 'debug' | 'log';
+type LogLevel = 'error' | 'warn' | 'info' | 'debug' | 'log';
+type Options = {
+    dateFunc: (date: Date) => string;
+    logLevels: LogLevel[];
+};
 export default class FormattedLogger {
-    private static groupCount;
-    private static grouped;
-    private static levels;
-    private static formatTime;
-    private static formatMessage;
-    private static getGroupLabel;
-    private static __log;
-    static setTimeFormat(func: (date: Date) => any): FormattedLogger;
-    static setLevel(levels: LoggerLevel[]): FormattedLogger;
-    static group(level: LoggerLevel): FormattedLogger;
-    static ungroup(): FormattedLogger;
-    static debug(...messages: any[]): FormattedLogger;
-    static info(...messages: any[]): FormattedLogger;
-    static warn(...messages: any[]): FormattedLogger;
-    static error(...messages: any[]): FormattedLogger;
-    static log(...messages: any[]): FormattedLogger;
+    private groupCount;
+    private grouped;
+    private options;
+    constructor(options?: Partial<Options>);
+    private header;
+    private getGroupLabel;
+    private __log;
+    updateOptions(options: Options): FormattedLogger;
+    group(level: LogLevel): FormattedLogger;
+    ungroup(): FormattedLogger;
+    debug(...messages: any[]): FormattedLogger;
+    info(...messages: any[]): FormattedLogger;
+    warn(...messages: any[]): FormattedLogger;
+    error(...messages: any[]): FormattedLogger;
+    log(...messages: any[]): FormattedLogger;
 }
 export {};

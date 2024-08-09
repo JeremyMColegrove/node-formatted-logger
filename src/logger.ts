@@ -1,110 +1,94 @@
 import ansis from 'ansis'
 
-type LoggerLevel = 'error' | 'warn' | 'info' | 'debug' | 'log'
+type LogLevel = 'error' | 'warn' | 'info' | 'debug' | 'log'
+
+type Options = {
+	dateFunc: (date:Date)=>string
+	logLevels: LogLevel[]
+}
 
 export default class FormattedLogger {
-	private static groupCount: number = 0
-	private static grouped: boolean = false
-	private static levels:LoggerLevel[] = ['error', 'debug', 'log', 'warn', 'info']
-	private static formatTime:(date:Date)=>any = (date)=>date.toISOString()
-	// private static errorTypes = [Error, EvalError, TypeError, MediaError, RangeError, SyntaxError, AggregateError, ReferenceError, SuppressedError, WebTransportError, OverconstrainedError, SpeechSynthesisErrorEvent, Error]
-	private static formatMessage(level: string, message: any, color: (text: string) => string): string {
-
-		const timestamp = this.formatTime(new Date())
-
-		// const formattedMessage = typeof message === 'string' ? message : JSON.stringify(message, null, 2)
-		// Check if message is an Error and format it accordingly
-		if (typeof message == 'string') {
-			let formattedMessage = message
-			return `${color(`[${level.toUpperCase()}]`)}\t${ansis.gray(`[${timestamp}]`)}\t${formattedMessage}`
-		}
-		return `${color(`[${level.toUpperCase()}]`)}\t${ansis.gray(`[${timestamp}]:`)}\t`
-		// if (message instanceof Error) {
-			// formattedMessage = `Error: ${message.message}\nStack: ${message.stack}`
-		// if (typeof message !== 'string') {
-		// 	// Attempt to stringify non-string, non-Error messages
-		// 	try {
-		// 		formattedMessage = JSON.stringify(message, null, 2)
-		// 	} catch (error) {
-		// 		formattedMessage = 'Failed to stringify message'
-		// 	}
-		// }
-
-		
+	private groupCount: number = 0
+	private grouped: boolean = false
+	private options:Options = {
+		dateFunc:(date)=>date.toISOString(), 
+		logLevels:['error', 'debug', 'log', 'warn', 'info']
+	}
+	constructor (options?:Partial<Options>) {
+		this.options = Object.assign(this.options, options)
+	}
+	
+	private header(level: string, color: (text: string) => string): string {
+		const timestamp = this.options.dateFunc(new Date())
+		return `${color(`[${level.toUpperCase()}]`)}\t${ansis.gray(`[${timestamp}]`)}\t`
 	}
 
-	private static getGroupLabel(level: string): string {
-		return `Log Group ${FormattedLogger.groupCount}: ${level.toUpperCase()}`
+	private getGroupLabel(level: string): string {
+		return `Log Group ${this.groupCount}: ${level.toUpperCase()}`
 	}
 
-	private static __log(level: LoggerLevel, color: (text: string) => string, ...messages: any[]): void {
-		if (!FormattedLogger.levels?.includes(level)) return
+	private __log(level: LogLevel, color: (text: string) => string, ...messages: any[]): void {
+		if (!this.options.logLevels?.includes(level)) return
 
 		if (messages.length > 1) {
-			FormattedLogger.groupCount++
-			const groupLabel = FormattedLogger.getGroupLabel(level)
-			!FormattedLogger.grouped && console.groupCollapsed && console.groupCollapsed(ansis.dim(groupLabel))
+			this.groupCount++
+			const groupLabel = this.getGroupLabel(level)
+			this.group(level)
 			messages.forEach((message) => {
-				console.log(typeof message)
-				console.log(FormattedLogger.formatMessage(level, message, color))
-				if (typeof message == 'object') {
-					console.log(message)
-				}
+				console.log(this.header(level,color), message)
 			})
-			!FormattedLogger.grouped && console.groupEnd && console.groupEnd()
+			if (this.grouped && console.groupEnd) {
+				console.groupEnd()
+				console.log(ansis.dim(groupLabel + " END"))
+			}
 		} else {
-			console.log(FormattedLogger.formatMessage(level, messages[0], color))
+			console.log(this.header(level,color), messages[0])
 		}
 	}
 
-	static setTimeFormat(func:(date:Date)=>any):FormattedLogger {
-		this.formatTime = func
+	updateOptions(options:Options):FormattedLogger {
+		this.options = Object.assign(this.options, options)
 		return this
 	}
 
-	static setLevel(levels:LoggerLevel[]):FormattedLogger {
-		FormattedLogger.levels = levels
-		return this
-	}
-
-	static group(level: LoggerLevel):FormattedLogger {
-		FormattedLogger.grouped = true
+	group(level: LogLevel):FormattedLogger {
+		this.grouped = true
 		if (console && console.groupCollapsed) {
-			console.groupCollapsed(ansis.dim(FormattedLogger.getGroupLabel(level)))
+			console.groupCollapsed(ansis.dim(this.getGroupLabel(level)))
 		}
 		return this
 	}
 
-	static ungroup():FormattedLogger {
-		FormattedLogger.grouped = false
+	ungroup():FormattedLogger {
+		this.grouped = false
 		if (console && console.groupEnd) {
 			console.groupEnd()
 		}
 		return this
 	}
 
-	static debug(...messages: any[]):FormattedLogger {
-		FormattedLogger.__log('debug', ansis.blue, ...messages)
+	debug(...messages: any[]):FormattedLogger {
+		this.__log('debug', ansis.blue, ...messages)
 		return this
 	}
 
-	static info(...messages: any[]):FormattedLogger {
-		FormattedLogger.__log('info', ansis.green, ...messages)
+	info(...messages: any[]):FormattedLogger {
+		this.__log('info', ansis.green, ...messages)
 		return this
 	}
 
-	static warn(...messages: any[]):FormattedLogger {
-		FormattedLogger.__log('warn', ansis.yellow, ...messages)
+	warn(...messages: any[]):FormattedLogger {
+		this.__log('warn', ansis.yellow, ...messages)
 		return this
 	}
 
-	static error(...messages: any[]):FormattedLogger {
-		FormattedLogger.__log('error', ansis.red, ...messages)
+	error(...messages: any[]):FormattedLogger {
+		this.__log('error', ansis.red, ...messages)
 		return this
 	}
 
-	static log(...messages: any[]):FormattedLogger {
-		FormattedLogger.__log('log', ansis.gray, ...messages)
+	log(...messages: any[]):FormattedLogger {
+		this.__log('log', ansis.gray, ...messages)
 		return this
 	}
 }
