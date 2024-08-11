@@ -6,7 +6,7 @@ A beautifully customizable and fast logger for Node.js that formats messages wit
 - **Date Formatting:** Customize how dates appear in logs using the `dateTransformer` option.
 - **Piping:** Redirect logs to any destination (file, server, etc.) with the `pipe` callback.
 - **YAML Output:** Toggle YAML formatting with `yamlOptions.enabled`, and customize every aspect, from colors to indentation.
-- **Color Control:** Complete control over log colors, from keys to values, and everything in between.
+- **Color Control:** Complete control over log colors, from keys to values, and everything in between. We support all colors from `colors.js`.
 - **Array Formatting:** Save space with inline arrays, perfect for logs with large arrays.
 - **Fully Typed:** All methods and variables are fully typed, meaning you don't have to guess what goes where. With CJS and ESM support, this package is plug and play.
 ## 🚀 Installation
@@ -34,17 +34,16 @@ logger.warn("Failed to retrieve JSON from API");
 
 This will log a warning with the current timestamp, formatted according to your preferences.
 
-## 📸 Examples
+## 📸 Example
 
 Here’s what your logs could look like:
 
-_Coming soon_
-<!-- ![Example log in console](path/to/example-log.png) -->
+![Example log in console](example-log.png)
 
 _... and many more customizations are available!_
 ## 🌟 Why Choose formatted-logger?
 
-There’s no shortage of loggers out there, but `formatted-logger` stands out for its robustness and customizability. Whether you're working on a small project or managing logs for a massive application, `formatted-logger` ensures your logs are not only informative but also easy on the eyes. Plus, it's fast and flexible, making it ideal for those who appreciate well-structured and colorful logs.
+There’s no shortage of loggers out there, but `formatted-logger` stands out for its nice format and customizability. Plus, it's fast and flexible, making it ideal for those who appreciate well-structured and colorful logs.
 
 ## 🌍 Supported Environments
 
@@ -110,7 +109,7 @@ There’s no shortage of loggers out there, but `formatted-logger` stands out fo
   ```
 
 ### `noColor`
-- **Description:** Disables color in logs. Useful when outputting to files or other non-terminal destinations.
+- **Description:** Disables color in logs. Useful when outputting to files or other non-terminal destinations. You can also choose to keep colors in the logs and use `FormattedLogger.stripColors(...args)` to remove all colors. 
 - **Default:** `false`
 - **Example:**
   ```javascript

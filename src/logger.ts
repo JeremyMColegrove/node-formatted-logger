@@ -2,7 +2,7 @@ import colors from 'colors'
 //@ts-ignore
 import {render} from './lib/prettyoutput.js'
 import * as utils from './lib/utils.js'
-import { DeepPartial, LogLevel, Options } from './types'
+import { DeepPartial, LogLevel, Options } from './types.js'
 
 export const defaultOptions: Options = {
 	groupIndentation:3,
@@ -42,6 +42,11 @@ export default class FormattedLogger {
 	
 	constructor(options?: DeepPartial<Options>) {
 		this.options = utils.mergeDeep(this.options, options)
+	}
+
+	static stripColors(...args:any[]) {
+		// reset all colors and pass back
+		return args.map(arg=>colors.stripColors(arg))
 	}
 
 	private colorString(thing:string, color:(text:string)=>string) {

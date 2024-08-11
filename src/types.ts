@@ -1,21 +1,80 @@
 
-export type Color = 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | 'white' 
-                            | 'gray' | 'grey' | 'bold' | 'dim' | 'italic' | 'underline' | 'hidden' | 'strikethrough' | 'rainbow' | 'zebra'
-                            | 'america' | 'trap' | 'random' | 'zalgo' | 'strip'
+export type Color = 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | 'white' | 'gray' | 'grey' | 'black' | 
+'bgBlack' | 'bgRed' | 'bgGreen' | 'bgYellow' | 'bgBlue' | 'bgMagenta' | 'bgCyan' | 'bgWhite'
+| 'bold' | 'dim' | 'italic' | 'underline' | 'inverse' | 'hidden' | 'strikethrough' | 
+'rainbow' | 'zebra' | 'america' | 'trap' | 'random' | 'strip' | 'reset'
 
 export interface Colors {
+	/**
+	 * Color of object keys.
+	 */
     keys: Color;
+	/**
+	 * Color for dates.
+	 */
     date: Color
+	/**
+	 * Color for dashes in lists.
+	 */
     dash: Color
+	/**
+	 * Color for all numbers.
+	 */
     number: Color
+	/**
+	 * Color for all strings.
+	 */
     string: Color
+	/**
+	 * Color for the boolean true.
+	 */
     true: Color
+	/**
+	 * Color for the boolean false.
+	 */
     false: Color
+	/**
+	 * Color for null type.
+	 */
     null: Color
+	/**
+	 * Color for undefined type.
+	 */
     undefined: Color
 }
 
 export type LogLevel = 'error' | 'warn' | 'info' | 'debug' | 'log'
+
+export type YamlOptions = {
+	/**
+	 * Change the character used when indenting items. Default is ' '.
+	 */
+	indentationCharacter: string;
+	/**
+	 * Limit the depth of printing for objects, in case an object has cycles or a lot of embedded keys.
+	 */
+	maxDepth: number;
+	/**
+	 * Disables all color output only for Yaml objects.
+	 */
+	noColor: boolean;
+	/**
+	 * The colors for the different types.
+	 */
+	colors: Colors;
+	/**
+	 * Align the values of each key to each other.
+	 */
+	alignKeyValues: boolean;
+	/**
+	 * Print the arrays inline to save space when printing. Useful if you have large arrays.
+	 */
+	inlineArrays:boolean
+	/**
+	 * Enables/disables Yaml printing. If disabled, defaults to standard output for objects/arrays.
+	 */
+	enabled:boolean
+}
 
 export interface Options {
 	groupIndentation:number
@@ -32,15 +91,7 @@ export interface Options {
 	/**
 	 * Options for printing objects and arrays in Yaml format.
 	 */
-	yamlOptions: {
-		indentationCharacter: string;
-		maxDepth: number;
-		noColor: boolean;
-		colors: Colors;
-		alignKeyValues: boolean;
-		inlineArrays:boolean
-		enabled:boolean
-	}
+	yamlOptions: YamlOptions
 	/**
 	 * If the logs should have color or not.
 	 */

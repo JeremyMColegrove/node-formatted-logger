@@ -13,7 +13,11 @@ var f = new FormattedLogger({
     dateTransformer:(date:Date)=>date.toDateString(), 
     noColor:false,
     autoGroup:true,
-    
+    yamlOptions: {
+      colors: {
+        keys: 'reset'
+      }
+    }
 })
 
 // do whatever logging
