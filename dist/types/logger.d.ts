@@ -17,7 +17,7 @@ export default class FormattedLogger {
      * @param label Label header text
      * @returns FormattedLogger
      */
-    group(label?: string): FormattedLogger;
+    group(label?: string | null): FormattedLogger;
     /**
      * Ends a grouping of logs
      * @returns FormattedLogger

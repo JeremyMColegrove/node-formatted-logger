@@ -116,7 +116,7 @@ export default class FormattedLogger {
 	 * @param label Label header text
 	 * @returns FormattedLogger
 	 */
-	group(label?:string): FormattedLogger {
+	group(label?:string|null): FormattedLogger {
 		this.options.pipe(this.indent() + this.colorString(`${this.getGroupLabel()}${label?`: ${label}`:''}`, colors.dim))
 		this.groupLevel++ // Increase the group level
 		return this
