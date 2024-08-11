@@ -59,10 +59,6 @@ export type YamlOptions = {
 	 * Limit the depth of printing for objects, in case an object has cycles or a lot of embedded keys.
 	 */
 	maxDepth: number;
-	/**
-	 * Disables all color output only for Yaml objects.
-	 */
-	noColor: boolean;
 	
 	/**
 	 * Align the values of each key to each other.

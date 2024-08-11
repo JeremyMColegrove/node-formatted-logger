@@ -96,15 +96,16 @@ There’s no shortage of loggers out there, but `formatted-logger` stands out fo
       yamlOptions: {
           enabled: true,
           indentationCharacter: '>', // Use '>' instead of spaces for indentation
-          colors: {
+          inlineArrays: true // Display arrays in a single line
+          alignKeyValues:true
+      },
+      colors: {
+              info: 'green',
               keys: 'cyan',
               string: 'green',
               number: 'yellow',
               ...
           },
-          inlineArrays: true // Display arrays in a single line
-          alignKeyValues:true
-      }
   });
   logger.log({ key: "value", list: [1, 2, 3] });
   ```
@@ -150,7 +151,7 @@ With these options, you can make `formatted-logger` fit perfectly into your proj
 
 ## 🔧 Command Line Usage
 
-`formatted-logger` can also be used from the command line to log files or individual messages.
+Install `formatted-logger` globally with the command `npm i -g formatted-logger` to use command line functionality and log files or individual messages.
 
 ### Basic Usage
 
