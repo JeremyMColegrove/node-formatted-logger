@@ -6,7 +6,25 @@ export const defaultOptions = {
     groupIndentation: 3,
     dateTransformer: (date) => date.toISOString(),
     logLevels: ['error', 'debug', 'log', 'warn', 'info'],
-    yamlOptions: { enabled: true },
+    yamlOptions: {
+        maxDepth: 6,
+        colors: {
+            dash: 'white',
+            date: 'magenta',
+            null: 'dim',
+            number: 'yellow',
+            string: 'green',
+            undefined: 'dim',
+            true: 'yellow',
+            false: 'yellow',
+            keys: 'white'
+        },
+        enabled: true,
+        inlineArrays: false,
+        alignKeyValues: true,
+        indentationCharacter: ' ',
+        noColor: false
+    },
     pipe: console.log,
     noColor: false,
     autoGroup: true
@@ -42,7 +60,7 @@ export default class FormattedLogger {
             return message;
         }
         // render the yaml object
-        var prettied = render(message, Object.assign(Object.assign({}, this.options.yamlOptions), { dateTransform: this.options.dateTransformer, noColor: this.options.yamlOptions.noColor || this.options.noColor }));
+        var prettied = render(message, this.options);
         if (prettied.trim().indexOf('\n') == -1) {
             return prettied.trim();
         }

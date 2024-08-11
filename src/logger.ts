@@ -2,7 +2,7 @@ import colors from 'colors'
 //@ts-ignore
 import {render} from './lib/prettyoutput.js'
 import * as utils from './lib/utils.js'
-import { DeepPartial, LogLevel, Options } from './types.js'
+import { DeepPartial, LogLevel, Options } from './types'
 
 export const defaultOptions: Options = {
 	groupIndentation:3,

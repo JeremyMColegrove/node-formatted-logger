@@ -3,6 +3,8 @@
     "compilerOptions": {
       "declaration": true /* Generates corresponding '.d.ts' file. */,
       "emitDeclarationOnly": true,
+      "noEmit": false,
+      "allowJs": false,
       "declarationDir": "../dist/types",
     //   "outDir": "../dist/types" /* Redirect output structure to the directory. */
     }

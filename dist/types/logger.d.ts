@@ -1,44 +1,10 @@
-import * as yamlTypes from './lib/types.js';
-type LogLevel = 'error' | 'warn' | 'info' | 'debug' | 'log';
-type PublicYamlOptions = Omit<yamlTypes.Options, "dateTransform">;
-type Options = {
-    groupIndentation: number;
-    /**
-     * Convert a date into a string for printing. This applies to the logger and Objects/Arrays.
-     * @param date The current Date object.
-     * @returns string
-     */
-    dateTransformer: (date: Date) => string;
-    /**
-     * Allowed log levels to pipe/print.
-     */
-    logLevels: LogLevel[];
-    /**
-     * Options for printing objects and arrays in Yaml format.
-     */
-    yamlOptions: yamlTypes.DeepPartial<PublicYamlOptions>;
-    /**
-     * If the logs should have color or not.
-     */
-    noColor: boolean;
-    /**
-     * True if multiple arguments to logger should be auto grouped together.
-     */
-    autoGroup: boolean;
-    /**
-     * Callback when a log is printed to the console. Used for pushing to file or buffer.
-     * @param log The string format of the rendered log
-     * @param level The LogLevel
-     * @returns {any}
-     */
-    pipe: (log: string) => any;
-};
+import { DeepPartial, Options } from './types';
 export declare const defaultOptions: Options;
 export default class FormattedLogger {
     private groupLevel;
     private groupCount;
     private options;
-    constructor(options?: Partial<Options>);
+    constructor(options?: DeepPartial<Options>);
     private colorString;
     private header;
     private indent;
@@ -87,4 +53,3 @@ export default class FormattedLogger {
      */
     log(...messages: any[]): FormattedLogger;
 }
-export {};

@@ -1,6 +1,6 @@
 {
   "name": "formatted-logger",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "A beautiful, formatted logger for Node JS outputs with groupings, colors, and custom log levels.",
   "type": "module",
   "exports": {

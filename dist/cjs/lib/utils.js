@@ -23,6 +23,9 @@ function type(value) {
     if (Array.isArray(value)) {
         return 'Array';
     }
+    if (value instanceof Error) {
+        return 'Error';
+    }
     return 'Object';
 }
 function repeat(value, times) {
@@ -70,7 +73,7 @@ function stringify(thing, options) {
     if (thing === undefined)
         string = 'undefined';
     if (thing instanceof Date) {
-        return options.dateTransform(thing);
+        return options.dateTransformer(thing);
     }
     return string;
 }

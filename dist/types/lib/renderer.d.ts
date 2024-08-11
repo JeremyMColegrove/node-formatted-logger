@@ -1,4 +1,4 @@
-import { Color, Colors, Options } from './types.js';
+import { Color, Colors, Options } from '../types.js';
 /**
  * Get color of an input
  * @param {*} input

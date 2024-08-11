@@ -1,6 +1,6 @@
-import { Color, Options } from './types.js';
+import { Color, Options } from '../types.js';
 export declare function forEachRight(array: any[], callback: (item: any, index: number, array: any[]) => any): void;
-export declare function type(value: any): "Array" | "Object";
+export declare function type(value: any): "Array" | "Error" | "Object";
 export declare function repeat(value: string, times: number): string;
 /**
  * Creates a string with specified spaces count

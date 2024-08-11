@@ -15,7 +15,7 @@ export function isSerializable(input, options) {
         isEmptyArray(input));
 }
 export function isInlineArray(item, options) {
-    return Array.isArray(item) && options.inlineArrays;
+    return Array.isArray(item) && options.yamlOptions.inlineArrays;
 }
 /**
  * Checks if the data is a single line string

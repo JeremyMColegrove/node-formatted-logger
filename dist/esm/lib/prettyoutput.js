@@ -2,32 +2,6 @@
 import * as utils from './utils.js';
 import * as renderer from './renderer.js';
 import * as typeInspect from './typeInspect.js';
-var defaultOptions = {
-    maxDepth: 6,
-    colors: {
-        dash: 'white',
-        date: 'magenta',
-        null: 'dim',
-        number: 'yellow',
-        string: 'green',
-        undefined: 'dim',
-        true: 'yellow',
-        false: 'yellow',
-        keys: 'white'
-    },
-    enabled: true,
-    inlineArrays: false,
-    dateTransform: date => date.toString(),
-    alignKeyValues: true,
-    indentationCharacter: ' ',
-    noColor: false
-};
-function parseOptions(opts) {
-    var colors = defaultOptions.colors;
-    const options = Object.assign(defaultOptions, opts);
-    options.colors = Object.assign(colors, opts.colors);
-    return options;
-}
 /**
  * Format a JS/JSON object to YAML-style output.
  * @param {*} input
@@ -36,7 +10,8 @@ function parseOptions(opts) {
  * @return {string}
  */
 export function render(input, opts, indent) {
-    const options = parseOptions(opts);
+    // const options = parseOptions(opts)
+    var options = opts;
     const indentation = indent ? utils.indent(indent) : '';
     const stack = [
         { indentation: indentation, depth: 0, input: input, noRender: false },
@@ -53,7 +28,7 @@ export function render(input, opts, indent) {
         if (noRender) {
             output = `${output}${input}`;
         }
-        else if (depth > options.maxDepth) {
+        else if (depth > options.yamlOptions.maxDepth) {
             output = `${output}${renderer.renderMaxDepth(options, indentation)}`;
         }
         else if (typeInspect.isSerializable(input, options)) {
@@ -69,7 +44,7 @@ export function render(input, opts, indent) {
                     stack.push({ input: result, noRender: true, indentation: '', depth: 0 });
                     return true;
                 }
-                if (depth + 1 > options.maxDepth) {
+                if (depth + 1 > options.yamlOptions.maxDepth) {
                     const result = renderer.renderMaxDepthArrayValue(options, indentation);
                     stack.push({ input: result, noRender: true, indentation: '', depth: 0 });
                     return true;
@@ -82,7 +57,7 @@ export function render(input, opts, indent) {
         else {
             const isError = input instanceof Error;
             const keys = Object.getOwnPropertyNames(input);
-            const valueColumn = options.alignKeyValues ? utils.maxLength(keys) : 0;
+            const valueColumn = options.yamlOptions.alignKeyValues ? utils.maxLength(keys) : 0;
             utils.forEachRight(keys, (key) => {
                 const value = input[key];
                 if (isError && key === 'stack') {
@@ -95,7 +70,7 @@ export function render(input, opts, indent) {
                     stack.push({ input: result, noRender: true, indentation: '', depth: 0 });
                     return true;
                 }
-                if (depth + 1 > options.maxDepth) {
+                if (depth + 1 > options.yamlOptions.maxDepth) {
                     const result = renderer.renderMaxDepthObjectValue(key, valueColumn, options, indentation);
                     stack.push({ input: result, noRender: true, indentation: '', depth: 0 });
                     return true;

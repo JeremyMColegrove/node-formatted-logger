@@ -15,7 +15,7 @@ export interface Colors {
     undefined: Color
 }
 
-type LogLevel = 'error' | 'warn' | 'info' | 'debug' | 'log'
+export type LogLevel = 'error' | 'warn' | 'info' | 'debug' | 'log'
 
 export interface Options {
 	groupIndentation:number
@@ -58,6 +58,6 @@ export interface Options {
 	pipe: (...logs:any[]) => any
 }
 
-type DeepPartial<T> = {
+export type DeepPartial<T> = {
 	[P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };

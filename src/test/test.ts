@@ -13,6 +13,7 @@ var f = new FormattedLogger({
     dateTransformer:(date:Date)=>date.toDateString(), 
     noColor:false,
     autoGroup:true,
+    
 })
 
 // do whatever logging

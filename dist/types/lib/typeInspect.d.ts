@@ -1,4 +1,4 @@
-import { Options } from "./types.js";
+import { Options } from "../types.js";
 /**
  * Serializable values are boolean, number, null, Date, Single line strings, empty arrays
  * @param {*} input
