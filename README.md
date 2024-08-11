@@ -1,7 +1,14 @@
 # 🌟 formatted-logger
 
 A beautifully customizable and fast logger for Node.js that formats messages with style, prints objects in YAML format, and allows for flexible piping of output. Perfect for projects where you need logs that not only provide valuable information but also look great! Better yet, everything is fully typed and documented.
+### Key Features:
 
+- **Date Formatting:** Customize how dates appear in logs using the `dateTransformer` option.
+- **Piping:** Redirect logs to any destination (file, server, etc.) with the `pipe` callback.
+- **YAML Output:** Toggle YAML formatting with `yamlOptions.enabled`, and customize every aspect, from colors to indentation.
+- **Color Control:** Complete control over log colors, from keys to values, and everything in between.
+- **Array Formatting:** Save space with inline arrays, perfect for logs with large arrays.
+- **Fully Typed:** All methods and variables are fully typed, meaning you don't have to guess what goes where. With CJS and ESM support, this package is plug and play.
 ## 🚀 Installation
 
 Get started with `formatted-logger` in just a few seconds!
@@ -15,7 +22,8 @@ npm i formatted-logger
 To use `formatted-logger`, simply instantiate it with your desired options:
 
 ```javascript
-const FormattedLogger = require('formatted-logger');
+import FormattedLogger from 'formatted-logger'
+// OR const FormattedLogger = require('formatted-logger')
 
 var logger = new FormattedLogger({
     // Your custom options here
@@ -34,6 +42,13 @@ _Coming soon_
 <!-- ![Example log in console](path/to/example-log.png) -->
 
 _... and many more customizations are available!_
+## 🌟 Why Choose formatted-logger?
+
+There’s no shortage of loggers out there, but `formatted-logger` stands out for its robustness and customizability. Whether you're working on a small project or managing logs for a massive application, `formatted-logger` ensures your logs are not only informative but also easy on the eyes. Plus, it's fast and flexible, making it ideal for those who appreciate well-structured and colorful logs.
+
+## 🌍 Supported Environments
+
+`formatted-logger` is designed to work in all environments where JavaScript is running—whether it’s Node.js, a browser, or a serverless function.
 
 ## 🎨 Customization
 
@@ -133,21 +148,6 @@ _... and many more customizations are available!_
 With these options, you can make `formatted-logger` fit perfectly into your project’s needs. Whether you need colorful, grouped logs for the console or neatly formatted text files, `formatted-logger` gives you the power to customize it all.
 
 
-### Key Features:
-
-- **Date Formatting:** Customize how dates appear in logs using the `dateTransformer` option.
-- **Piping:** Redirect logs to any destination (file, server, etc.) with the `pipe` callback.
-- **YAML Output:** Toggle YAML formatting with `yamlOptions.enabled`, and customize every aspect, from colors to indentation.
-- **Color Control:** Complete control over log colors, from keys to values, and everything in between.
-- **Array Formatting:** Save space with inline arrays, perfect for logs with large arrays.
-
-## 🌟 Why Choose formatted-logger?
-
-There’s no shortage of loggers out there, but `formatted-logger` stands out for its robustness and customizability. Whether you're working on a small project or managing logs for a massive application, `formatted-logger` ensures your logs are not only informative but also easy on the eyes. Plus, it's fast and flexible, making it ideal for those who appreciate well-structured and colorful logs.
-
-## 🌍 Supported Environments
-
-`formatted-logger` is designed to work in all environments where JavaScript is running—whether it’s Node.js, a browser, or a serverless function.
 
 
 
