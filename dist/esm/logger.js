@@ -48,7 +48,7 @@ export default class FormattedLogger {
         }
         return this.colorString(`${utils.type(message)} Properties:`, colors[((_a = this.options.yamlOptions.colors) === null || _a === void 0 ? void 0 : _a.keys) || 'white']) + '\n' + prettied
             .split('\n')
-            .map((line, index) => (index > 1 ? this.indent() : '') + ' '.repeat(this.options.groupIndentation) + line)
+            .map((line, index) => ' '.repeat((this.groupLevel + 1) * this.options.groupIndentation) + line)
             .join('\n');
     }
     getGroupLabel() {

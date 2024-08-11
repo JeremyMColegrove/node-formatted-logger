@@ -17,6 +17,7 @@ var f = new FormattedLogger({
     }
 });
 // do whatever logging
+f.group("Test Error");
 f.error("Error has been encountered. Aborting.");
 f.warn({
     date: new Date(),
@@ -35,6 +36,8 @@ f.warn({
     ],
 });
 f.info("Recovered. Continuing as normal.");
+f.ungroup();
+f.info("Processing time took 234ms");
 // f.error({this:null, is:undefined, an:[], object:[1,2,3], embedd:{a:{c:{c:[1,2,3, "hello", new Date()]}}}})
 // flush buffer
 fs.writeFileSync('./output.txt', buffer.join('\n'), 'utf8');
