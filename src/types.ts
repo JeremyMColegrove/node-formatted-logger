@@ -5,6 +5,11 @@ export type Color = 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | '
 'rainbow' | 'zebra' | 'america' | 'trap' | 'random' | 'strip' | 'reset'
 
 export interface Colors {
+	debug: Color;
+	error: Color;
+	info: Color;
+	warn: Color;
+	log: Color;
 	/**
 	 * Color of object keys.
 	 */
@@ -58,10 +63,7 @@ export type YamlOptions = {
 	 * Disables all color output only for Yaml objects.
 	 */
 	noColor: boolean;
-	/**
-	 * The colors for the different types.
-	 */
-	colors: Colors;
+	
 	/**
 	 * Align the values of each key to each other.
 	 */
@@ -88,6 +90,10 @@ export interface Options {
 	 * Allowed log levels to pipe/print. 
 	 */
 	logLevels: LogLevel[]
+	/**
+	 * The colors for the different types.
+	 */
+	colors: Colors;
 	/**
 	 * Options for printing objects and arrays in Yaml format.
 	 */

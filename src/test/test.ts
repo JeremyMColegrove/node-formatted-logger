@@ -2,9 +2,6 @@ import FormattedLogger from "../logger";
 import fs from 'fs'
 
 
-
-var buffer:string[] = []
-
 var f = new FormattedLogger({
     pipe:(...args:any[]) => {
         // output to console
@@ -14,15 +11,13 @@ var f = new FormattedLogger({
     noColor:false,
     autoGroup:true,
     yamlOptions: {
-      colors: {
-        keys: 'reset'
-      }
     }
 })
 
 // do whatever logging
 f.group("Test Error")
 f.error("Error has been encountered. Aborting.")
+f.error("Hello")
 f.warn({
 date: new Date(),
 installs:1,
@@ -40,5 +35,6 @@ keywords: [
   ],
 })
 f.info("Recovered. Continuing as normal.")
+f.debug("An info and debug right next to each other")
 f.ungroup()
 f.info("Processing time took 234ms")

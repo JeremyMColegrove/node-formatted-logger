@@ -74,12 +74,12 @@ function renderSerializable(input, options, indentation, newline = true) {
         }
         return renderEmptyArray(options, indentation);
     }
-    const color = inputColor(input, options.yamlOptions.colors);
+    const color = inputColor(input, options.colors);
     const inputResult = utils.colorThing((0, utils_js_1.stringify)(input, options), color, options.noColor);
     return `${indentation}${inputResult}${newline ? '\n' : ''}`;
 }
 function renderMultilineString(input, options, indentation) {
-    const color = inputColor(input, options.yamlOptions.colors);
+    const color = inputColor(input, options.colors);
     const indentedString = utils.alignString(input, indent(indentation, options));
     const output = `${indentation}"""\n${indentedString}\n${indentation}"""\n`;
     return utils.colorThing((0, utils_js_1.stringify)(output, options), color, options.noColor);
@@ -88,12 +88,12 @@ function renderEmptyArray(options, indentation) {
     return `${indentation}(empty array)\n`;
 }
 function renderObjectKey(key, options, indentation) {
-    const colors = options.yamlOptions.colors || {};
+    const colors = options.colors || {};
     const output = `${indentation}${key}: `;
     return utils.colorThing((0, utils_js_1.stringify)(output, options), colors.keys, options.noColor);
 }
 function renderDash(options, indentation) {
-    const colors = options.yamlOptions.colors;
+    const colors = options.colors;
     const output = `${indentation}- `;
     return utils.colorThing((0, utils_js_1.stringify)(output, options), colors.dash, options.noColor);
 }
@@ -128,7 +128,7 @@ function renderMaxDepthArrayValue(options, indentation) {
     return `${renderedDash}${renderedValue}`;
 }
 function renderErrorStack(stack, options, indentation) {
-    const color = inputColor(stack, options.yamlOptions.colors);
+    const color = inputColor(stack, options.colors);
     const indentedDash = renderDash(options, indentation);
     const indentedStack = utils.alignString(stack, indentedDash);
     return utils.colorThing((0, utils_js_1.stringify)(indentedStack, options), color, options.noColor);

@@ -37,14 +37,14 @@ export function renderSerializable(input: any, options: Options, indentation: st
         return renderEmptyArray(options, indentation);
     }
 
-    const color = inputColor(input, options.yamlOptions.colors);
+    const color = inputColor(input, options.colors);
     const inputResult = utils.colorThing(stringify(input, options), color, options.noColor);
 
     return `${indentation}${inputResult}${newline?'\n':''}`;
 }
 
 export function renderMultilineString(input: string, options: Options, indentation: string): string {
-    const color = inputColor(input, options.yamlOptions.colors);
+    const color = inputColor(input, options.colors);
     const indentedString = utils.alignString(input, indent(indentation, options));
     const output = `${indentation}"""\n${indentedString}\n${indentation}"""\n`;
 
@@ -56,14 +56,14 @@ export function renderEmptyArray(options: Options, indentation: string): string 
 }
 
 export function renderObjectKey(key: string, options: Options, indentation: string): string {
-    const colors = options.yamlOptions.colors || {};
+    const colors = options.colors || {};
     const output = `${indentation}${key}: `;
 
     return utils.colorThing(stringify(output, options), colors.keys, options.noColor);
 }
 
 export function renderDash(options: Options, indentation: string): string {
-    const colors = options.yamlOptions.colors;
+    const colors = options.colors;
     const output = `${indentation}- `;
 
     return utils.colorThing(stringify(output, options), colors.dash, options.noColor);
@@ -111,7 +111,7 @@ export function renderMaxDepthArrayValue(options: Options, indentation: string):
 }
 
 export function renderErrorStack(stack: string, options: Options, indentation: string): string {
-    const color = inputColor(stack, options.yamlOptions.colors!);
+    const color = inputColor(stack, options.colors!);
     const indentedDash = renderDash(options, indentation);
     const indentedStack = utils.alignString(stack, indentedDash);
 

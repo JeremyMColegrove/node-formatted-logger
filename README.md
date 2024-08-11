@@ -45,6 +45,7 @@ _... and many more customizations are available!_
 
 There’s no shortage of loggers out there, but `formatted-logger` stands out for its nice format and customizability. Plus, it's fast and flexible, making it ideal for those who appreciate well-structured and colorful logs.
 
+
 ## 🌍 Supported Environments
 
 `formatted-logger` is designed to work in all environments where JavaScript is running—whether it’s Node.js, a browser, or a serverless function.
@@ -147,6 +148,110 @@ There’s no shortage of loggers out there, but `formatted-logger` stands out fo
 With these options, you can make `formatted-logger` fit perfectly into your project’s needs. Whether you need colorful, grouped logs for the console or neatly formatted text files, `formatted-logger` gives you the power to customize it all.
 
 
+## 🔧 Command Line Usage
+
+`formatted-logger` can also be used from the command line to log files or individual messages.
+
+### Basic Usage
+
+To get started, you can invoke `formatted-logger` from the command line:
+
+```bash
+formatted-logger [options] <file ...>
+```
+
+### Options
+
+Below are the options you can use with the CLI:
+
+- **`-n, --noColor`**
+  - **Description:** Disable color in the output.
+  - **Example:**
+    ```bash
+    formatted-logger -n myfile.json
+    ```
+
+- **`--maxDepth [maxDepth]`**
+  - **Description:** Set the maximum depth for inspecting objects.
+  - **Example:**
+    ```bash
+    formatted-logger --maxDepth 3 myfile.json
+    ```
+
+- **`-m, --message <message>`**
+  - **Description:** Specify a message to log.
+  - **Example:**
+    ```bash
+    formatted-logger -m "This is a custom message"
+    ```
+
+- **`-e, --error`**
+  - **Description:** Log the message as an error.
+  - **Example:**
+    ```bash
+    formatted-logger -e -m "This is an error message"
+    ```
+
+- **`-w, --warn`**
+  - **Description:** Log the message as a warning.
+  - **Example:**
+    ```bash
+    formatted-logger -w -m "This is a warning message"
+    ```
+
+- **`-l, --log`**
+  - **Description:** Log the message as a regular log (default behavior).
+  - **Example:**
+    ```bash
+    formatted-logger -l -m "This is a regular log message"
+    ```
+
+- **`-d, --debug`**
+  - **Description:** Log the message as a debug message.
+  - **Example:**
+    ```bash
+    formatted-logger -d -m "This is a debug message"
+    ```
+
+- **`-i, --info`**
+  - **Description:** Log the message as an informational message.
+  - **Example:**
+    ```bash
+    formatted-logger -i -m "This is an info message"
+    ```
+
+### Version
+
+You can check the current version of `formatted-logger` using the `-v` or `--version` option:
+
+```bash
+formatted-logger -v
+```
+
+### Example Commands
+
+1. **Log a JSON file with no color:**
+   ```bash
+   formatted-logger -n myfile.json
+   ```
+
+2. **Log a custom message as a warning:**
+   ```bash
+   formatted-logger -w -m "This is a warning message"
+   ```
+
+3. **Inspect a file with a max depth of 3:**
+   ```bash
+   formatted-logger --maxDepth 3 myfile.json
+   ```
+
+### Combining Options
+
+You can combine multiple options to customize your log output. For example, to log a message as an error without colors:
+
+```bash
+formatted-logger -e -n -m "Critical error encountered"
+```
 
 
 

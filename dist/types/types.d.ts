@@ -1,5 +1,10 @@
 export type Color = 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | 'white' | 'gray' | 'grey' | 'black' | 'bgBlack' | 'bgRed' | 'bgGreen' | 'bgYellow' | 'bgBlue' | 'bgMagenta' | 'bgCyan' | 'bgWhite' | 'bold' | 'dim' | 'italic' | 'underline' | 'inverse' | 'hidden' | 'strikethrough' | 'rainbow' | 'zebra' | 'america' | 'trap' | 'random' | 'strip' | 'reset';
 export interface Colors {
+    debug: Color;
+    error: Color;
+    info: Color;
+    warn: Color;
+    log: Color;
     /**
      * Color of object keys.
      */
@@ -52,10 +57,6 @@ export type YamlOptions = {
      */
     noColor: boolean;
     /**
-     * The colors for the different types.
-     */
-    colors: Colors;
-    /**
      * Align the values of each key to each other.
      */
     alignKeyValues: boolean;
@@ -80,6 +81,10 @@ export interface Options {
      * Allowed log levels to pipe/print.
      */
     logLevels: LogLevel[];
+    /**
+     * The colors for the different types.
+     */
+    colors: Colors;
     /**
      * Options for printing objects and arrays in Yaml format.
      */

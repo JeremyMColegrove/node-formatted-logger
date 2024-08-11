@@ -1,24 +1,45 @@
 #!/usr/bin/env node
 'use strict'
 
-import * as logger from '../dist/esm/index.js'
+import FormattedLogger from '../dist/esm/index.js'
+import { fileURLToPath } from 'url'
+
 import fs from 'fs'
 import colors from 'colors/safe.js'
 import { Command } from 'commander/esm.mjs'
+import { createRequire } from 'module';
+import path from 'path';
+
+// Get __dirname equivalent
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const require = createRequire(import.meta.url);
+const packageJson = require(path.join(__dirname, '../package.json'));
 
 const program = new Command()
 program
     .usage('[options] <file ...>')
-    .version("2.0.0")
-    .option('-i, --indent [indent]', 'Space per indent', parseInt)
+    .version(packageJson.version)
     .option('-n, --noColor', 'Disable color')
-    .option('-d, --depth [depth]', 'Max depth inspection', parseInt)
+    .option('--maxDepth [maxDepth]', 'Max depth inspection', parseInt)
+    .option('-m, --message <message>', 'Message to log')
+    .option('-e, --error', 'Log as error', false)
+    .option('-w, --warn', 'Log as warning', false)
+    .option('-l, --log', 'Log as regular log', false)
+    .option('-d, --debug', 'Log as debug', false)
+    .option('-i, --info', 'Log as info', false)
     .parse(process.argv)
 
+// console.log(program)
 const options = {
-    indentationLength: program.indent,
-    noColor: program.noColor,
-    maxDepth: program.depth
+    noColor: program.getOptionValue('noColor'),
+    maxDepth: program.getOptionValue('maxDepth'),
+    warn:program.getOptionValue('warn'),
+    error:program.getOptionValue('error'),
+    log:program.getOptionValue('log'),
+    info:program.getOptionValue('info'),
+    debug:program.getOptionValue('debug'),
+    message:program.getOptionValue('message'),
 }
 
 const renderInput = function (data) {
@@ -26,20 +47,46 @@ const renderInput = function (data) {
     try {
         input = JSON.parse(data)
     } catch (e) {
-
         if (program.debug) console.error(`${colors.red('Error:')} unparsable content`) //eslint-disable-line no-console
     }
-    var lgr = new logger()
-    console.log(lgr.info(input, options)) //eslint-disable-line no-console
+    // console.log(options)
+    var lgr = new FormattedLogger({
+        noColor:options.noColor,
+        yamlOptions: {
+            maxDepth:options.maxDepth,
+        }
+    })
+    if (options.error) {
+        lgr.error(input)
+    }
+    if (options.warn) {
+        lgr.warn(input)
+    }
+    if (options.debug) {
+        lgr.debug(input)
+    }
+    if (options.log) {
+        lgr.log(input)
+    }
+    if (options.info) {
+        lgr.info(input)
+    }
+    if (!options.error && !options.warn && !options.debug && !options.log && !options.info) {
+        lgr.log(input)
+    }
 }
-
-if (program.args.length) {
-    // First parameter is the file to read and parse
-    const filename = program.args[0]
+// console.log(program)
+if (program.args.length || options.message) {
     try {
-        renderInput(fs.readFileSync(filename, 'utf8')) //eslint-disable-line no-sync
+        if (options.message) {
+            renderInput(options.message)
+        } else {
+            // First parameter is the file to read and parse
+            const filename = path.join(process.cwd(), program.args[0])
+            renderInput(fs.readFileSync(filename, 'utf8')) //eslint-disable-line no-sync
+        }
     } catch (e) {
-        console.error(`${colors.red('Error:')} File ${filename} does not exist`) //eslint-disable-line no-console
+        console.error(e) //eslint-disable-line no-console
         process.exit(1) //eslint-disable-line no-process-exit
     }
 } else {

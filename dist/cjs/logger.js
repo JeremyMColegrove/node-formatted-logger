@@ -35,19 +35,24 @@ exports.defaultOptions = {
     groupIndentation: 3,
     dateTransformer: (date) => date.toISOString(),
     logLevels: ['error', 'debug', 'log', 'warn', 'info'],
+    colors: {
+        info: 'blue',
+        log: 'reset',
+        warn: 'yellow',
+        debug: 'cyan',
+        error: 'red',
+        dash: 'green',
+        date: 'magenta',
+        null: 'dim',
+        number: 'yellow',
+        string: 'reset',
+        undefined: 'dim',
+        true: 'yellow',
+        false: 'yellow',
+        keys: 'green'
+    },
     yamlOptions: {
         maxDepth: 6,
-        colors: {
-            dash: 'white',
-            date: 'magenta',
-            null: 'dim',
-            number: 'yellow',
-            string: 'green',
-            undefined: 'dim',
-            true: 'yellow',
-            false: 'yellow',
-            keys: 'white'
-        },
         enabled: true,
         inlineArrays: false,
         alignKeyValues: true,
@@ -78,16 +83,15 @@ class FormattedLogger {
     }
     header(level, color) {
         const timestamp = this.options.dateTransformer(new Date());
+        if (this.options.noColor) {
+            return `[${level.toUpperCase()}]\t[${timestamp}]\t`;
+        }
         return `${this.colorString(`[${level.toUpperCase()}]`, color)}\t${this.colorString(`[${timestamp}]`, colors_1.default.gray)}\t`;
     }
     indent() {
         return ' '.repeat(this.groupLevel * this.options.groupIndentation); // Add indentation based on the group level
     }
     formatMessage(message) {
-        var _a;
-        if (typeof message === 'string') {
-            return message;
-        }
         // return string if yaml disabled
         if (!this.options.yamlOptions.enabled) {
             return message;
@@ -97,7 +101,7 @@ class FormattedLogger {
         if (prettied.trim().indexOf('\n') == -1) {
             return prettied.trim();
         }
-        return this.colorString(`${utils.type(message)} Properties:`, colors_1.default[((_a = this.options.yamlOptions.colors) === null || _a === void 0 ? void 0 : _a.keys) || 'white']) + '\n' + prettied
+        return this.colorString(`${utils.type(message)} Properties:`, colors_1.default[this.options.colors.string]) + '\n' + prettied
             .split('\n')
             .map((line, index) => ' '.repeat((this.groupLevel + 1) * this.options.groupIndentation) + line)
             .join('\n');
@@ -152,7 +156,7 @@ class FormattedLogger {
      * @returns FormattedLogger
      */
     debug(...messages) {
-        this.__log('debug', colors_1.default.blue, ...messages);
+        this.__log('debug', colors_1.default[this.options.colors.debug], ...messages);
         return this;
     }
     /**
@@ -161,7 +165,7 @@ class FormattedLogger {
      * @returns FormattedLogger
      */
     info(...messages) {
-        this.__log('info', colors_1.default.green, ...messages);
+        this.__log('info', colors_1.default[this.options.colors.info], ...messages);
         return this;
     }
     /**
@@ -170,7 +174,7 @@ class FormattedLogger {
      * @returns FormattedLogger
      */
     warn(...messages) {
-        this.__log('warn', colors_1.default.yellow, ...messages);
+        this.__log('warn', colors_1.default[this.options.colors.warn], ...messages);
         return this;
     }
     /**
@@ -179,7 +183,7 @@ class FormattedLogger {
      * @returns FormattedLogger
      */
     error(...messages) {
-        this.__log('error', colors_1.default.red, ...messages);
+        this.__log('error', colors_1.default[this.options.colors.error], ...messages);
         return this;
     }
     /**
@@ -188,7 +192,7 @@ class FormattedLogger {
      * @returns FormattedLogger
      */
     log(...messages) {
-        this.__log('log', colors_1.default.gray, ...messages);
+        this.__log('log', colors_1.default[this.options.colors.log], ...messages);
         return this;
     }
 }

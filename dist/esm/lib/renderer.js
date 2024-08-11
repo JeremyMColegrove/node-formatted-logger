@@ -35,12 +35,12 @@ export function renderSerializable(input, options, indentation, newline = true) 
         }
         return renderEmptyArray(options, indentation);
     }
-    const color = inputColor(input, options.yamlOptions.colors);
+    const color = inputColor(input, options.colors);
     const inputResult = utils.colorThing(stringify(input, options), color, options.noColor);
     return `${indentation}${inputResult}${newline ? '\n' : ''}`;
 }
 export function renderMultilineString(input, options, indentation) {
-    const color = inputColor(input, options.yamlOptions.colors);
+    const color = inputColor(input, options.colors);
     const indentedString = utils.alignString(input, indent(indentation, options));
     const output = `${indentation}"""\n${indentedString}\n${indentation}"""\n`;
     return utils.colorThing(stringify(output, options), color, options.noColor);
@@ -49,12 +49,12 @@ export function renderEmptyArray(options, indentation) {
     return `${indentation}(empty array)\n`;
 }
 export function renderObjectKey(key, options, indentation) {
-    const colors = options.yamlOptions.colors || {};
+    const colors = options.colors || {};
     const output = `${indentation}${key}: `;
     return utils.colorThing(stringify(output, options), colors.keys, options.noColor);
 }
 export function renderDash(options, indentation) {
-    const colors = options.yamlOptions.colors;
+    const colors = options.colors;
     const output = `${indentation}- `;
     return utils.colorThing(stringify(output, options), colors.dash, options.noColor);
 }
@@ -89,7 +89,7 @@ export function renderMaxDepthArrayValue(options, indentation) {
     return `${renderedDash}${renderedValue}`;
 }
 export function renderErrorStack(stack, options, indentation) {
-    const color = inputColor(stack, options.yamlOptions.colors);
+    const color = inputColor(stack, options.colors);
     const indentedDash = renderDash(options, indentation);
     const indentedStack = utils.alignString(stack, indentedDash);
     return utils.colorThing(stringify(indentedStack, options), color, options.noColor);
