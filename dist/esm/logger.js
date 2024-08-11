@@ -37,6 +37,10 @@ export default class FormattedLogger {
         this.options = defaultOptions;
         this.options = utils.mergeDeep(this.options, options);
     }
+    static stripColors(...args) {
+        // reset all colors and pass back
+        return args.map(arg => colors.stripColors(arg));
+    }
     colorString(thing, color) {
         if (this.options.noColor) {
             return thing;

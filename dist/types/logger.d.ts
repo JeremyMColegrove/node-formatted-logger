@@ -5,6 +5,7 @@ export default class FormattedLogger {
     private groupCount;
     private options;
     constructor(options?: DeepPartial<Options>);
+    static stripColors(...args: any[]): string[];
     private colorString;
     private header;
     private indent;
