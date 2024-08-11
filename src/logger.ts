@@ -2,53 +2,31 @@ import colors from 'colors'
 //@ts-ignore
 import {render} from './lib/prettyoutput.js'
 import * as utils from './lib/utils.js'
-import * as yamlTypes from './lib/types.js'
-
-// import type { RendererOptions } from './types';
-type LogLevel = 'error' | 'warn' | 'info' | 'debug' | 'log'
-
-// omit any keys from yaml options here
-type PublicYamlOptions = Omit<yamlTypes.Options, "dateTransform">
-
-// the options available for the logger
-type Options = {
-	groupIndentation:number
-	/**
-	 * Convert a date into a string for printing. This applies to the logger and Objects/Arrays.
-	 * @param date The current Date object.
-	 * @returns string
-	 */
-	dateTransformer: (date: Date) => string
-	/**
-	 * Allowed log levels to pipe/print. 
-	 */
-	logLevels: LogLevel[]
-	/**
-	 * Options for printing objects and arrays in Yaml format.
-	 */
-	yamlOptions: yamlTypes.DeepPartial<PublicYamlOptions>
-	/**
-	 * If the logs should have color or not.
-	 */
-	noColor:boolean
-	/**
-	 * True if multiple arguments to logger should be auto grouped together.
-	 */
-	autoGroup:boolean
-	/**
-	 * Callback when a log is printed to the console. Used for pushing to file or buffer.
-	 * @param log The string format of the rendered log
-	 * @param level The LogLevel
-	 * @returns {any}
-	 */
-	pipe: (log:string) => any
-}
+import { DeepPartial, LogLevel, Options } from './types.js'
 
 export const defaultOptions: Options = {
 	groupIndentation:3,
 	dateTransformer: (date) => date.toISOString(),
 	logLevels: ['error', 'debug', 'log', 'warn', 'info'],
-	yamlOptions: {enabled:true},
+	yamlOptions: {
+		maxDepth:6,
+		colors: {
+			dash:'white',
+			date:'magenta',
+			null:'dim',
+			number:'yellow',
+			string:'green',
+			undefined:'dim',
+			true:'yellow',
+			false:'yellow',
+			keys:'white'
+		},
+		enabled:true,
+		inlineArrays:false,
+		alignKeyValues:true,
+		indentationCharacter:' ',
+		noColor:false
+	},
 	pipe:console.log,
 	noColor:false,
 	autoGroup:true
@@ -61,7 +39,8 @@ export default class FormattedLogger {
 	private groupCount: number = 0 // Track the number of groups created
 	// default options
 	private options = defaultOptions
-	constructor(options?: Partial<Options>) {
+	
+	constructor(options?: DeepPartial<Options>) {
 		this.options = utils.mergeDeep(this.options, options)
 	}
 
@@ -92,7 +71,7 @@ export default class FormattedLogger {
 		}
 
 		// render the yaml object
-		var prettied = render(message, {...this.options.yamlOptions, dateTransform:this.options.dateTransformer, noColor:this.options.yamlOptions.noColor||this.options.noColor})
+		var prettied = render(message, this.options)
 		if (prettied.trim().indexOf('\n') == -1) {
 			return prettied.trim()
 		}

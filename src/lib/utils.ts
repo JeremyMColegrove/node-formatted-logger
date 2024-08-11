@@ -1,7 +1,7 @@
 'use strict';
 
 import colors from 'colors/safe.js';
-import { Color, Options } from './types.js';
+import { Color, Options } from '../types.js';
 
 export function forEachRight(array:any[], callback:(item:any, index:number, array:any[])=>any) {
     for (let i = array.length - 1; i >= 0; i--) {
@@ -12,6 +12,9 @@ export function forEachRight(array:any[], callback:(item:any, index:number, arra
 export function type (value:any) {
     if (Array.isArray(value)) {
         return 'Array'
+    }
+    if (value instanceof Error) {
+      return 'Error'
     }
     return 'Object'
 }
@@ -63,7 +66,7 @@ export function stringify(thing:any, options:Options):string {
     if (thing === null) string = 'null';
     if (thing === undefined) string = 'undefined';
     if (thing instanceof Date) {
-        return options.dateTransform(thing)
+        return options.dateTransformer(thing)
     }
 
     return string

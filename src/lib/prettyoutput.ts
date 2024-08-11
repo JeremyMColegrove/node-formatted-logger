@@ -3,35 +3,7 @@
 import * as utils from './utils.js';
 import * as renderer from './renderer.js';
 import * as typeInspect from './typeInspect.js';
-import {DeepPartial, Options } from './types.js';
-
-var defaultOptions:Options = {
-    maxDepth:6,
-    colors: {
-        dash:'white',
-        date:'magenta',
-        null:'dim',
-        number:'yellow',
-        string:'green',
-        undefined:'dim',
-        true:'yellow',
-        false:'yellow',
-        keys:'white'
-    },
-    enabled:true,
-    inlineArrays:false,
-    dateTransform:date=>date.toString(),
-    alignKeyValues:true,
-    indentationCharacter:' ',
-    noColor:false
-}
-
-function parseOptions (opts:DeepPartial<Options>) {
-    var colors = defaultOptions.colors
-    const options = Object.assign(defaultOptions, opts)
-    options.colors = Object.assign(colors, opts.colors)
-    return options
-}
+import {Options } from '../types.js';
 
 /**
  * Format a JS/JSON object to YAML-style output.
@@ -40,9 +12,9 @@ function parseOptions (opts:DeepPartial<Options>) {
  * @param {number} [indent] - Initial level of indent
  * @return {string}
  */
-export function render(input: any, opts: DeepPartial<Options>, indent?: number): string {
-    const options = parseOptions(opts)
-
+export function render(input: any, opts: Options, indent?: number): string {
+    // const options = parseOptions(opts)
+    var options = opts
     const indentation = indent ? utils.indent(indent) : '';
     const stack: Array<{ indentation: string; depth: number; input: any; noRender: boolean }> = [
         { indentation: indentation, depth: 0, input: input, noRender: false },
@@ -62,7 +34,7 @@ export function render(input: any, opts: DeepPartial<Options>, indent?: number):
 
         if (noRender) {
             output = `${output}${input}`;
-        } else if (depth > options.maxDepth) {
+        } else if (depth > options.yamlOptions.maxDepth) {
             output = `${output}${renderer.renderMaxDepth(options, indentation)}`;
         } else if (typeInspect.isSerializable(input, options)) {
             output = `${output}${renderer.renderSerializable(input, options, indentation)}`;
@@ -76,7 +48,7 @@ export function render(input: any, opts: DeepPartial<Options>, indent?: number):
                     return true;
                 }
 
-                if (depth + 1 > options.maxDepth) {
+                if (depth + 1 > options.yamlOptions.maxDepth) {
                     const result = renderer.renderMaxDepthArrayValue(options, indentation);
                     stack.push({ input: result, noRender: true, indentation: '', depth: 0 });
                     return true;
@@ -89,7 +61,7 @@ export function render(input: any, opts: DeepPartial<Options>, indent?: number):
         } else {
             const isError = input instanceof Error;
             const keys = Object.getOwnPropertyNames(input);
-            const valueColumn = options.alignKeyValues ? utils.maxLength(keys) : 0;
+            const valueColumn = options.yamlOptions.alignKeyValues ? utils.maxLength(keys) : 0;
             utils.forEachRight(keys, (key) => {
                 const value = input[key];
 
@@ -105,7 +77,7 @@ export function render(input: any, opts: DeepPartial<Options>, indent?: number):
                     return true;
                 }
 
-                if (depth + 1 > options.maxDepth) {
+                if (depth + 1 > options.yamlOptions.maxDepth) {
                     const result = renderer.renderMaxDepthObjectValue(key, valueColumn, options, indentation);
                     stack.push({ input: result, noRender: true, indentation: '', depth: 0 });
                     return true;

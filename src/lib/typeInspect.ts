@@ -1,6 +1,6 @@
 'use strict';
 
-import { Options } from "./types.js";
+import { Options } from "../types.js";
 
 /**
  * Serializable values are boolean, number, null, Date, Single line strings, empty arrays
@@ -21,7 +21,7 @@ export function isSerializable(input: any, options:Options): boolean {
 }
 
 export function isInlineArray(item:any[], options:Options) {
-    return Array.isArray(item) && options.inlineArrays
+    return Array.isArray(item) && options.yamlOptions.inlineArrays
 }
 
 /**
