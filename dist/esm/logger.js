@@ -4,7 +4,7 @@ import { render } from './lib/prettyoutput.js';
 import * as utils from './lib/utils.js';
 export const defaultOptions = {
     groupIndentation: 3,
-    dateTransformer: (date) => date.toISOString(),
+    dateTransformer: (date) => date.toLocaleString(),
     logLevels: ['error', 'debug', 'log', 'warn', 'info'],
     colors: {
         info: 'blue',

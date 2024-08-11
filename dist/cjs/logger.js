@@ -33,7 +33,7 @@ const prettyoutput_js_1 = require("./lib/prettyoutput.js");
 const utils = __importStar(require("./lib/utils.js"));
 exports.defaultOptions = {
     groupIndentation: 3,
-    dateTransformer: (date) => date.toISOString(),
+    dateTransformer: (date) => date.toLocaleString(),
     logLevels: ['error', 'debug', 'log', 'warn', 'info'],
     colors: {
         info: 'blue',

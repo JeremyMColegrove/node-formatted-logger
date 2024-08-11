@@ -6,7 +6,7 @@ import { DeepPartial, LogLevel, Options } from './types.js'
 
 export const defaultOptions: Options = {
 	groupIndentation:3,
-	dateTransformer: (date) => date.toISOString(),
+	dateTransformer: (date) => date.toLocaleString(),
 	logLevels: ['error', 'debug', 'log', 'warn', 'info'],
 	colors: {
 		info:'blue',
