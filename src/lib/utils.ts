@@ -1,7 +1,7 @@
 'use strict';
 
-import colors from 'colors/safe';
-import { Color, Options } from './types';
+import colors from 'colors/safe.js';
+import { Color, Options } from './types.js';
 
 export function forEachRight(array:any[], callback:(item:any, index:number, array:any[])=>any) {
     for (let i = array.length - 1; i >= 0; i--) {
@@ -11,9 +11,9 @@ export function forEachRight(array:any[], callback:(item:any, index:number, arra
 
 export function type (value:any) {
     if (Array.isArray(value)) {
-        return 'array'
+        return 'Array'
     }
-    return 'object'
+    return 'Object'
 }
 
 export function repeat(value:string, times:number):string {
