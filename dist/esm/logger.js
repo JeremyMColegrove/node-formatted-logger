@@ -27,8 +27,7 @@ export const defaultOptions = {
         enabled: true,
         inlineArrays: false,
         alignKeyValues: true,
-        indentationCharacter: ' ',
-        noColor: false
+        indentationCharacter: ' '
     },
     pipe: console.log,
     noColor: false,

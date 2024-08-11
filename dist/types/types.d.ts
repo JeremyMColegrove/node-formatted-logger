@@ -53,10 +53,6 @@ export type YamlOptions = {
      */
     maxDepth: number;
     /**
-     * Disables all color output only for Yaml objects.
-     */
-    noColor: boolean;
-    /**
      * Align the values of each key to each other.
      */
     alignKeyValues: boolean;
