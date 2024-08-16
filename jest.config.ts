@@ -4,6 +4,7 @@ const config:JestConfigWithTsJest = {
   transform: {
     ...createDefaultEsmPreset().transform,
   },
+  
   passWithNoTests:true,
   testEnvironment: 'node',
   extensionsToTreatAsEsm: ['.ts'],
