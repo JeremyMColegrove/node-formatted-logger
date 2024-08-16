@@ -1,4 +1,4 @@
-import colors from 'colors';
+import * as colors from 'colors/safe.js';
 //@ts-ignore
 import { render } from './lib/prettyoutput.js';
 import * as utils from './lib/utils.js';
@@ -73,7 +73,7 @@ export default class FormattedLogger {
         }
         return this.colorString(`${utils.type(message)} Properties:`, colors[this.options.colors.string]) + '\n' + prettied
             .split('\n')
-            .map((line, index) => ' '.repeat((this.groupLevel + 1) * this.options.groupIndentation) + line)
+            .map((line) => ' '.repeat((this.groupLevel + 1) * this.options.groupIndentation) + line)
             .join('\n');
     }
     getGroupLabel() {
@@ -162,6 +162,7 @@ export default class FormattedLogger {
      * @returns FormattedLogger
      */
     log(...messages) {
+        console.log(this.options.colors.log);
         this.__log('log', colors[this.options.colors.log], ...messages);
         return this;
     }

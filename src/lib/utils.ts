@@ -1,6 +1,6 @@
 'use strict';
 
-import colors from 'colors/safe.js';
+import * as colors from 'colors/safe.js';
 import { Color, Options } from '../types.js';
 
 export function forEachRight(array:any[], callback:(item:any, index:number, array:any[])=>any) {

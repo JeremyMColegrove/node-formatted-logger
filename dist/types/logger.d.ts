@@ -1,4 +1,4 @@
-import { DeepPartial, Options } from './types.js';
+import { DeepPartial, Options } from './types';
 export declare const defaultOptions: Options;
 export default class FormattedLogger {
     private groupLevel;

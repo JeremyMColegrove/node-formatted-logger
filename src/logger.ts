@@ -1,8 +1,9 @@
-import colors from 'colors'
+import * as colors from 'colors/safe.js'
+
 //@ts-ignore
 import {render} from './lib/prettyoutput.js'
 import * as utils from './lib/utils.js'
-import { DeepPartial, LogLevel, Options } from './types.js'
+import { DeepPartial, LogLevel, Options } from './types'
 
 export const defaultOptions: Options = {
 	groupIndentation:3,
@@ -86,7 +87,7 @@ export default class FormattedLogger {
 		}
 		return this.colorString(`${utils.type(message)} Properties:`, colors[this.options.colors.string]) + '\n' + prettied
 				.split('\n')
-				.map((line:string, index:number) =>  ' '.repeat((this.groupLevel+1) * this.options.groupIndentation) + line)
+				.map((line:string) =>  ' '.repeat((this.groupLevel+1) * this.options.groupIndentation) + line)
 				.join('\n');
 	}
 
@@ -180,6 +181,7 @@ export default class FormattedLogger {
 	 * @returns FormattedLogger
 	 */
 	log(...messages: any[]): FormattedLogger {
+		console.log(this.options.colors.log)
 		this.__log('log', colors[this.options.colors.log], ...messages)
 		return this
 	}

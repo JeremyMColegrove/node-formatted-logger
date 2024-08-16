@@ -1,36 +1,10 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultOptions = void 0;
-const colors_1 = __importDefault(require("colors"));
+const colors = require("colors/safe.js");
 //@ts-ignore
 const prettyoutput_js_1 = require("./lib/prettyoutput.js");
-const utils = __importStar(require("./lib/utils.js"));
+const utils = require("./lib/utils.js");
 exports.defaultOptions = {
     groupIndentation: 3,
     dateTransformer: (date) => date.toLocaleString(),
@@ -72,7 +46,7 @@ class FormattedLogger {
     }
     static stripColors(...args) {
         // reset all colors and pass back
-        return args.map(arg => colors_1.default.stripColors(arg));
+        return args.map(arg => colors.stripColors(arg));
     }
     colorString(thing, color) {
         if (this.options.noColor) {
@@ -85,7 +59,7 @@ class FormattedLogger {
         if (this.options.noColor) {
             return `[${level.toUpperCase()}]\t[${timestamp}]\t`;
         }
-        return `${this.colorString(`[${level.toUpperCase()}]`, color)}\t${this.colorString(`[${timestamp}]`, colors_1.default.gray)}\t`;
+        return `${this.colorString(`[${level.toUpperCase()}]`, color)}\t${this.colorString(`[${timestamp}]`, colors.gray)}\t`;
     }
     indent() {
         return ' '.repeat(this.groupLevel * this.options.groupIndentation); // Add indentation based on the group level
@@ -100,9 +74,9 @@ class FormattedLogger {
         if (prettied.trim().indexOf('\n') == -1) {
             return prettied.trim();
         }
-        return this.colorString(`${utils.type(message)} Properties:`, colors_1.default[this.options.colors.string]) + '\n' + prettied
+        return this.colorString(`${utils.type(message)} Properties:`, colors[this.options.colors.string]) + '\n' + prettied
             .split('\n')
-            .map((line, index) => ' '.repeat((this.groupLevel + 1) * this.options.groupIndentation) + line)
+            .map((line) => ' '.repeat((this.groupLevel + 1) * this.options.groupIndentation) + line)
             .join('\n');
     }
     getGroupLabel() {
@@ -133,7 +107,7 @@ class FormattedLogger {
      * @returns FormattedLogger
      */
     group(label) {
-        this.options.pipe(this.indent() + this.colorString(`${this.getGroupLabel()}${label ? `: ${label}` : ''}`, colors_1.default.dim));
+        this.options.pipe(this.indent() + this.colorString(`${this.getGroupLabel()}${label ? `: ${label}` : ''}`, colors.dim));
         this.groupLevel++; // Increase the group level
         return this;
     }
@@ -144,7 +118,7 @@ class FormattedLogger {
     ungroup() {
         if (this.groupLevel > 0) {
             this.groupLevel--; // Decrease the group level
-            this.options.pipe(this.indent() + this.colorString(`${this.getGroupLabel()} END`, colors_1.default.dim));
+            this.options.pipe(this.indent() + this.colorString(`${this.getGroupLabel()} END`, colors.dim));
             this.groupCount++;
         }
         return this;
@@ -155,7 +129,7 @@ class FormattedLogger {
      * @returns FormattedLogger
      */
     debug(...messages) {
-        this.__log('debug', colors_1.default[this.options.colors.debug], ...messages);
+        this.__log('debug', colors[this.options.colors.debug], ...messages);
         return this;
     }
     /**
@@ -164,7 +138,7 @@ class FormattedLogger {
      * @returns FormattedLogger
      */
     info(...messages) {
-        this.__log('info', colors_1.default[this.options.colors.info], ...messages);
+        this.__log('info', colors[this.options.colors.info], ...messages);
         return this;
     }
     /**
@@ -173,7 +147,7 @@ class FormattedLogger {
      * @returns FormattedLogger
      */
     warn(...messages) {
-        this.__log('warn', colors_1.default[this.options.colors.warn], ...messages);
+        this.__log('warn', colors[this.options.colors.warn], ...messages);
         return this;
     }
     /**
@@ -182,7 +156,7 @@ class FormattedLogger {
      * @returns FormattedLogger
      */
     error(...messages) {
-        this.__log('error', colors_1.default[this.options.colors.error], ...messages);
+        this.__log('error', colors[this.options.colors.error], ...messages);
         return this;
     }
     /**
@@ -191,7 +165,8 @@ class FormattedLogger {
      * @returns FormattedLogger
      */
     log(...messages) {
-        this.__log('log', colors_1.default[this.options.colors.log], ...messages);
+        console.log(this.options.colors.log);
+        this.__log('log', colors[this.options.colors.log], ...messages);
         return this;
     }
 }

@@ -1,7 +1,4 @@
 'use strict';
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.forEachRight = forEachRight;
 exports.type = type;
@@ -13,7 +10,7 @@ exports.stringify = stringify;
 exports.colorThing = colorThing;
 exports.isObject = isObject;
 exports.mergeDeep = mergeDeep;
-const safe_js_1 = __importDefault(require("colors/safe.js"));
+const colors = require("colors/safe.js");
 function forEachRight(array, callback) {
     for (let i = array.length - 1; i >= 0; i--) {
         callback(array[i], i, array);
@@ -87,7 +84,7 @@ function colorThing(string, color, disabled) {
     if (disabled) {
         return string;
     }
-    return safe_js_1.default[color](string);
+    return colors[color](string);
 }
 function isObject(item) {
     return (item && typeof item === 'object' && !Array.isArray(item));
