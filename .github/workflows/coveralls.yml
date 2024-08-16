@@ -15,6 +15,6 @@ jobs:
     - name: npm install, jest
       run: |
         npm install
-        jest
+        npm test
     - name: Coveralls
       uses: coverallsapp/github-action@v2
