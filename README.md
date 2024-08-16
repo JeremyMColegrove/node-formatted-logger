@@ -1,3 +1,5 @@
+<!-- [![Coverage Status](https://coveralls.io/repos/github/JeremyMColegrove/node-formatted-logger/badge.svg?branch=main)](https://coveralls.io/github/JeremyMColegrove/node-formatted-logger?branch=main) -->
+
 # 🌟 formatted-logger
 
 A beautifully customizable and fast logger for Node.js that formats messages with style, prints objects in YAML format, and allows for flexible piping of output. Perfect for projects where you need logs that not only provide valuable information but also look great! Better yet, everything is fully typed and documented.
