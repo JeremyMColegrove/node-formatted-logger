@@ -1,4 +1,4 @@
-import FormattedLogger from '../logger';
+import FormattedLogger from '../src/logger';
 
 describe('FormattedLogger', () => {
   let logger: FormattedLogger;
@@ -8,7 +8,6 @@ describe('FormattedLogger', () => {
     output = '';
     logger = new FormattedLogger({
       pipe: (...args: any[]) => {
-        console.log(...args)
         output += args.join(' ') + '\n';
       },
       noColor: true,  // Disable colors for easier testing

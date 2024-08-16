@@ -181,7 +181,6 @@ export default class FormattedLogger {
 	 * @returns FormattedLogger
 	 */
 	log(...messages: any[]): FormattedLogger {
-		console.log(this.options.colors.log)
 		this.__log('log', colors[this.options.colors.log], ...messages)
 		return this
 	}
