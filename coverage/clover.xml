@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1723830640597" clover="3.2.0">
-  <project timestamp="1723830640597" name="All files">
+<coverage generated="1723884273844" clover="3.2.0">
+  <project timestamp="1723884273844" name="All files">
     <metrics statements="242" coveredstatements="127" conditionals="96" coveredconditionals="44" methods="53" coveredmethods="27" elements="391" coveredelements="198" complexity="0" loc="242" ncloc="242" packages="2" files="5" classes="5"/>
     <package name="src">
       <metrics statements="56" coveredstatements="51" conditionals="18" coveredconditionals="16" methods="19" coveredmethods="18"/>
-      <file name="logger.ts" path="/Users/jeremy/Documents/Github/node-formatted-logger/src/logger.ts">
+      <file name="logger.ts" path="C:\Users\Jeremy\Documents\GitHub\formatted-logger\src\logger.ts">
         <metrics statements="56" coveredstatements="51" conditionals="18" coveredconditionals="16" methods="19" coveredmethods="18"/>
         <line num="1" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -66,7 +66,7 @@
     </package>
     <package name="src.lib">
       <metrics statements="186" coveredstatements="76" conditionals="78" coveredconditionals="28" methods="34" coveredmethods="9"/>
-      <file name="prettyoutput.ts" path="/Users/jeremy/Documents/Github/node-formatted-logger/src/lib/prettyoutput.ts">
+      <file name="prettyoutput.ts" path="C:\Users\Jeremy\Documents\GitHub\formatted-logger\src\lib\prettyoutput.ts">
         <metrics statements="57" coveredstatements="20" conditionals="28" coveredconditionals="8" methods="3" coveredmethods="1"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -126,7 +126,7 @@
         <line num="88" count="0" type="stmt"/>
         <line num="93" count="16" type="stmt"/>
       </file>
-      <file name="renderer.ts" path="/Users/jeremy/Documents/Github/node-formatted-logger/src/lib/renderer.ts">
+      <file name="renderer.ts" path="C:\Users\Jeremy\Documents\GitHub\formatted-logger\src\lib\renderer.ts">
         <metrics statements="70" coveredstatements="23" conditionals="16" coveredconditionals="3" methods="16" coveredmethods="2"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -199,7 +199,7 @@
         <line num="124" count="0" type="stmt"/>
         <line num="125" count="0" type="stmt"/>
       </file>
-      <file name="typeInspect.ts" path="/Users/jeremy/Documents/Github/node-formatted-logger/src/lib/typeInspect.ts">
+      <file name="typeInspect.ts" path="C:\Users\Jeremy\Documents\GitHub\formatted-logger\src\lib\typeInspect.ts">
         <metrics statements="9" coveredstatements="7" conditionals="13" coveredconditionals="8" methods="4" coveredmethods="2"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="16" type="stmt"/>
@@ -211,7 +211,7 @@
         <line num="41" count="1" type="stmt"/>
         <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
       </file>
-      <file name="utils.ts" path="/Users/jeremy/Documents/Github/node-formatted-logger/src/lib/utils.ts">
+      <file name="utils.ts" path="C:\Users\Jeremy\Documents\GitHub\formatted-logger\src\lib\utils.ts">
         <metrics statements="50" coveredstatements="26" conditionals="21" coveredconditionals="9" methods="11" coveredmethods="4"/>
         <line num="3" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>

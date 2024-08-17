@@ -10,7 +10,7 @@ exports.stringify = stringify;
 exports.colorThing = colorThing;
 exports.isObject = isObject;
 exports.mergeDeep = mergeDeep;
-const colors = require("colors/safe.js");
+const types_js_1 = require("../types.js");
 function forEachRight(array, callback) {
     for (let i = array.length - 1; i >= 0; i--) {
         callback(array[i], i, array);
@@ -84,7 +84,7 @@ function colorThing(string, color, disabled) {
     if (disabled) {
         return string;
     }
-    return colors[color](string);
+    return types_js_1.colorMap[color](string);
 }
 function isObject(item) {
     return (item && typeof item === 'object' && !Array.isArray(item));

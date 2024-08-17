@@ -1,5 +1,5 @@
 'use strict';
-import * as colors from 'colors/safe.js';
+import { colorMap } from '../types.js';
 export function forEachRight(array, callback) {
     for (let i = array.length - 1; i >= 0; i--) {
         callback(array[i], i, array);
@@ -73,7 +73,7 @@ export function colorThing(string, color, disabled) {
     if (disabled) {
         return string;
     }
-    return colors[color](string);
+    return colorMap[color](string);
 }
 export function isObject(item) {
     return (item && typeof item === 'object' && !Array.isArray(item));

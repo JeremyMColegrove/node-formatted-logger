@@ -49,7 +49,6 @@ const renderInput = function (data) {
     } catch (e) {
         if (program.debug) console.error(`${colors.red('Error:')} unparsable content`) //eslint-disable-line no-console
     }
-    // console.log(options)
     var lgr = new FormattedLogger({
         noColor:options.noColor,
         yamlOptions: {
@@ -75,7 +74,6 @@ const renderInput = function (data) {
         lgr.log(input)
     }
 }
-// console.log(program)
 if (program.args.length || options.message) {
     try {
         if (options.message) {

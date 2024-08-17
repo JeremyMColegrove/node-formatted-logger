@@ -2,6 +2,7 @@
 
 import * as colors from 'colors/safe.js';
 import { Color, Options } from '../types.js';
+import { colorMap } from '../types.js';
 
 export function forEachRight(array:any[], callback:(item:any, index:number, array:any[])=>any) {
     for (let i = array.length - 1; i >= 0; i--) {
@@ -82,7 +83,7 @@ export function colorThing(string:string, color: Color, disabled:boolean): strin
     if (disabled) {
         return string
     }
-    return colors[color](string);
+    return colorMap[color](string);
 }
 
 

@@ -1,4 +1,6 @@
+import colors from 'colors';
 export type Color = 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | 'white' | 'gray' | 'grey' | 'black' | 'bgBlack' | 'bgRed' | 'bgGreen' | 'bgYellow' | 'bgBlue' | 'bgMagenta' | 'bgCyan' | 'bgWhite' | 'bold' | 'dim' | 'italic' | 'underline' | 'inverse' | 'hidden' | 'strikethrough' | 'rainbow' | 'zebra' | 'america' | 'trap' | 'random' | 'strip' | 'reset';
+export declare const colorMap: Record<Color, colors.Color>;
 export interface Colors {
     debug: Color;
     error: Color;

@@ -1,5 +1,5 @@
 TN:
-SF:src/logger.ts
+SF:src\logger.ts
 FN:10,(anonymous_0)
 FN:49,(anonymous_1)
 FN:53,(anonymous_2)
@@ -120,7 +120,7 @@ BRF:18
 BRH:16
 end_of_record
 TN:
-SF:src/lib/prettyoutput.ts
+SF:src\lib\prettyoutput.ts
 FN:15,render
 FN:44,(anonymous_1)
 FN:65,(anonymous_2)
@@ -220,7 +220,7 @@ BRF:28
 BRH:8
 end_of_record
 TN:
-SF:src/lib/renderer.ts
+SF:src\lib\renderer.ts
 FN:14,inputColor
 FN:28,indent
 FN:32,renderSerializable
@@ -347,7 +347,7 @@ BRF:16
 BRH:3
 end_of_record
 TN:
-SF:src/lib/typeInspect.ts
+SF:src\lib\typeInspect.ts
 FN:10,isSerializable
 FN:23,isInlineArray
 FN:32,isSingleLineString
@@ -386,7 +386,7 @@ BRF:13
 BRH:8
 end_of_record
 TN:
-SF:src/lib/utils.ts
+SF:src\lib\utils.ts
 FN:6,forEachRight
 FN:12,type
 FN:22,repeat

@@ -1,4 +1,5 @@
-import * as colors from 'colors/safe.js';
+import colors from 'colors/safe.js';
+import { colorMap } from './types.js';
 //@ts-ignore
 import { render } from './lib/prettyoutput.js';
 import * as utils from './lib/utils.js';
@@ -71,7 +72,7 @@ export default class FormattedLogger {
         if (prettied.trim().indexOf('\n') == -1) {
             return prettied.trim();
         }
-        return this.colorString(`${utils.type(message)} Properties:`, colors[this.options.colors.string]) + '\n' + prettied
+        return this.colorString(`${utils.type(message)} Properties:`, colorMap[this.options.colors.string]) + '\n' + prettied
             .split('\n')
             .map((line) => ' '.repeat((this.groupLevel + 1) * this.options.groupIndentation) + line)
             .join('\n');
@@ -126,7 +127,7 @@ export default class FormattedLogger {
      * @returns FormattedLogger
      */
     debug(...messages) {
-        this.__log('debug', colors[this.options.colors.debug], ...messages);
+        this.__log('debug', colorMap[this.options.colors.debug], ...messages);
         return this;
     }
     /**
@@ -135,7 +136,7 @@ export default class FormattedLogger {
      * @returns FormattedLogger
      */
     info(...messages) {
-        this.__log('info', colors[this.options.colors.info], ...messages);
+        this.__log('info', colorMap[this.options.colors.info], ...messages);
         return this;
     }
     /**
@@ -144,7 +145,7 @@ export default class FormattedLogger {
      * @returns FormattedLogger
      */
     warn(...messages) {
-        this.__log('warn', colors[this.options.colors.warn], ...messages);
+        this.__log('warn', colorMap[this.options.colors.warn], ...messages);
         return this;
     }
     /**
@@ -153,7 +154,7 @@ export default class FormattedLogger {
      * @returns FormattedLogger
      */
     error(...messages) {
-        this.__log('error', colors[this.options.colors.error], ...messages);
+        this.__log('error', colorMap[this.options.colors.error], ...messages);
         return this;
     }
     /**
@@ -162,8 +163,7 @@ export default class FormattedLogger {
      * @returns FormattedLogger
      */
     log(...messages) {
-        console.log(this.options.colors.log);
-        this.__log('log', colors[this.options.colors.log], ...messages);
+        this.__log('log', colorMap[this.options.colors.log], ...messages);
         return this;
     }
 }

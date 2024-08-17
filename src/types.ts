@@ -1,8 +1,44 @@
-
+import colors from 'colors'
 export type Color = 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | 'white' | 'gray' | 'grey' | 'black' | 
 'bgBlack' | 'bgRed' | 'bgGreen' | 'bgYellow' | 'bgBlue' | 'bgMagenta' | 'bgCyan' | 'bgWhite'
 | 'bold' | 'dim' | 'italic' | 'underline' | 'inverse' | 'hidden' | 'strikethrough' | 
 'rainbow' | 'zebra' | 'america' | 'trap' | 'random' | 'strip' | 'reset'
+
+export const colorMap:Record<Color, colors.Color> = {
+	red: colors.red,
+	green: colors.green,
+	yellow: colors.yellow,
+	blue: colors.blue,
+	magenta: colors.magenta,
+	cyan: colors.cyan,
+	white: colors.white,
+	gray: colors.gray,
+	grey: colors.grey,
+	black: colors.black,
+	bgBlack: colors.bgBlack,
+	bgRed: colors.bgRed,
+	bgGreen: colors.bgGreen,
+	bgYellow: colors.bgYellow,
+	bgBlue: colors.bgBlue,
+	bgMagenta: colors.bgMagenta,
+	bgCyan: colors.bgCyan,
+	bgWhite: colors.bgWhite,
+	bold: colors.bold,
+	dim: colors.dim,
+	italic: colors.italic,
+	underline: colors.underline,
+	inverse: colors.inverse,
+	hidden: colors.hidden,
+	strikethrough: colors.strikethrough,
+	rainbow: colors.rainbow,
+	zebra: colors.zebra,
+	america: colors.america,
+	trap: colors.trap,
+	random: colors.random,
+	strip: colors.strip,
+	reset: colors.reset
+}
+
 
 export interface Colors {
 	debug: Color;
